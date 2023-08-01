@@ -3,8 +3,8 @@ let body = document.body;
 let cards = document.querySelectorAll('.card');
 let backs = document.querySelectorAll('.back');
 let card, back;
-
-let cardClicked = true
+let start = '0';
+let WhenCheck = 0;
 
 START.addEventListener('click', () => {
     START.style.visibility = 'hidden';
@@ -18,37 +18,41 @@ START.addEventListener('click', () => {
         back.style.fontSize = '5vmin';
     });
     body.style.alignItems = 'stretch';
+    start = '1'
 });
 
-let flippedCards = [];
+let content1, content2;
 
-cards.forEach(card => {
+cards.forEach(card => {    
   card.addEventListener('click', () => {
-    // Sprawdzenie, czy karta jest już obrócona
-    if (flippedCards.includes(card)) {
-      // Karta jest już obrócona - cofnij obrót
+    if (card.style.transform === 'rotateY(180deg)') {
       card.style.transform = 'rotateY(0deg)';
-      // Usuń kartę z listy obróconych kart
-      flippedCards = flippedCards.filter(flippedCard => flippedCard !== card);
+      WhenCheck--;
     } else {
-      // Karta nie jest jeszcze obrócona
-      if (flippedCards.length < 1) {
-        // Obróć kartę tylko jeśli mamy mniej niż dwie obrócone karty
-        card.style.transform = 'rotateY(180deg)';
-        // Dodaj kartę do listy obróconych kart
-        flippedCards.push(card);
+      card.style.transform = 'rotateY(180deg)';
+      WhenCheck++;
+
+      if (WhenCheck === 1) {
+        content1 = card.textContent.trim();
+        console.log(content1);
+      } else if (WhenCheck === 2) {
+        content2 = card.textContent.trim();
+        console.log(content2);
+
+      if (content1 === content2) {
+        console.log('working! nice');
       } else {
-        // Mamy już dwie obrócone karty - cofnij obrót wszystkich kart i zresetuj listę
-        cards.forEach(otherCard => {
-          otherCard.style.transform = 'rotateY(0deg)';
+        cards.forEach(card => {
+          console.log('working but different');
+          setTimeout(() => {
+            card.style.transform = 'rotateY(0deg)';
+          }, 500);
         });
-        flippedCards = [];
-      }
-    }
+      };
+        WhenCheck = 0;
+      };
+    };
   });
 });
-  
-  
-  
   
   
