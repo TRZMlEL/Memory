@@ -25,8 +25,13 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap
+    flex-wrap: wrap;
+    transition: justify-content 0.3s ease;
 }
+
+.justify-space-around {
+    justify-content: space-around; /* Docelowa właściwość justify-content */
+  }
 
 .card{
     position: absolute;
@@ -68,6 +73,7 @@ body{
     font-size: 6.5vmin;
     text-align: center;
     font-weight: 450;
+    user-select: none;
 }
 
 
@@ -95,8 +101,4 @@ img{
 #STARTbtn:active{
     transform: translateY(1vmin);
     box-shadow: 0vmin 0vmin 0vmin var(--color_darker);
-}
-
-@keyframes rozłożenieKart {
-    
 }
