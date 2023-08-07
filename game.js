@@ -18,7 +18,7 @@ let randomization =
   '<img draggable="false" alt="Rick Sanchez" src="https://i1.sndcdn.com/avatars-000631834902-vd4fox-t500x500.jpg"/>4', 
   '<img draggable="false" alt="Stewie Griffin" src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2019/01/stewie-griffin-header.jpg"/>5', 
   '<img draggable="false" alt="Stewie Griffin" src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2019/01/stewie-griffin-header.jpg"/>5'
-]
+];
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -28,12 +28,10 @@ function shuffleArray(array) {
 }
 
 shuffleArray(randomization);
-console.log(randomization);
 
 fronts.forEach(front => {
   let firstItem = randomization[0];
   front.innerHTML = firstItem;
-  console.log(front);
   randomization.splice(0, 1);
 });
 
@@ -65,18 +63,13 @@ cards.forEach(card => {
 
       if (WhenCheck === 1) {
         content1 = card.textContent.trim();
-        console.log(content1);
       } else if (WhenCheck === 2) {
         content2 = card.textContent.trim();
-        console.log(content2);
 
       if (content1 === content2) {
-        console.log('working! nice');
-        card.classList.add("pairFound");
-        card.classList.remove("card");
+        cards
       } else {
         cards.forEach(card => {
-          console.log('working but different');
           setTimeout(() => {
             card.style.transform = 'rotateY(0deg)';
           }, 500);
@@ -84,6 +77,21 @@ cards.forEach(card => {
       };
         WhenCheck = 0;
       };
+
+      let allCardsFlipped = true;
+
+      cards.forEach(card => {
+        if (card.style.transform !== 'rotateY(180deg)') {
+          allCardsFlipped = false;
+          return;
+        }
+      });
+      
+      if (allCardsFlipped) {
+        setTimeout(() => {
+          alert("You won! Congratulations!");
+        }, 200);
+      }; 
     };
   });
 });
