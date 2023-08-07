@@ -33,7 +33,7 @@ body{
     justify-content: space-around; /* Docelowa właściwość justify-content */
   }
 
-.card{
+.card, .pairFound{
     position: absolute;
     width: 40vmin;
     height: 60vmin;
